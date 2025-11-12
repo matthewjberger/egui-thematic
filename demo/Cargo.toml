@@ -6,5 +6,5 @@ edition = "2021"
 
 [dependencies]
 egui-thematic = { path = ".." }
-nightshade = { path = "../../nightshade/crates/nightshade" }
+nightshade = "0.6.7"
 getrandom = { version = "0.2", features = ["js"] }

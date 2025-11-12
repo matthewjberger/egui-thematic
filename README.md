@@ -5,31 +5,36 @@
 [<img alt="docs.rs" src="https://img.shields.io/badge/docs.rs-egui--thematic-66c2a5?style=for-the-badge&labelColor=555555&logo=docs.rs" height="20">](https://docs.rs/egui-thematic)
 [<img alt="build status" src="https://img.shields.io/github/actions/workflow/status/matthewjberger/egui-thematic/rust.yml?branch=main&style=for-the-badge" height="20">](https://github.com/matthewjberger/egui-thematic/actions?query=branch%3Amain)
 
-A comprehensive theme editor and configuration system for [egui](https://github.com/emilk/egui) applications with live preview, preset management, random theme generation, and persistence.
+A theme editor and configuration system for [egui](https://github.com/emilk/egui) applications with live preview, preset management, random theme generation, and persistence.
 
 ## Features
 
-- **Full Theme Configuration**: Customize all visual aspects of your egui application
-  - Text colors (normal and weak)
-  - Window and panel fills
-  - Selection backgrounds
-  - Hyperlink colors
-  - Background colors (faint, extreme, code)
-  - Warning and error colors
+- **Complete Theme Configuration**: Full control over all 73 egui visual properties
+  - 8 core color palette entries (background, surface, primary, text, text weak, widget fill/hover/active)
+  - 3 global appearance controls (corner radius, border width, window shadow)
+  - 5 widget states × 8 properties each (noninteractive, inactive, hovered, active, open)
+  - Additional UI controls (text cursor, resize corners, button frames, etc.)
 
-- **Built-in Presets**: Dark and Light themes included out of the box
+- **Two-Level Interface**:
+  - **Simple Mode**: 8 colors + 3 sliders for quick theming (covers 80% of use cases)
+  - **Advanced Mode**: Collapsible sections for fine-grained per-widget-state control
+
+- **Live Preview Window**: Separate window shows changes instantly with Apply/Revert buttons
+  - See all changes before committing
+  - Keyboard shortcuts: Ctrl+Enter to apply, Escape to revert
+  - Fully interactive preview with all widget types
+
+- **Smart Global Controls**: Automatically detect when widget states have mixed values
+  - Disabled when states differ to prevent accidental overwrites
+  - Shows "(mixed)" indicator for clarity
+
+- **9 Built-in Presets**: Dark, Light, Dracula, Nord, Gruvbox, Solarized (Dark/Light), Monokai, One Dark, Tokyo Night, Catppuccin Mocha
 
 - **Random Theme Generation**: Generate completely random themes with a single click for exploration and inspiration
 
-- **Live Preview**: See changes in real-time as you edit with an interactive preview panel
+- **Code Export**: Export themes as JSON or Rust code for easy integration
 
 - **Persistence**: Save and load themes to/from JSON files for easy sharing and reuse
-
-- **Interactive Theme Editor**: Full-featured UI with:
-  - Collapsible sections for organized editing
-  - Color pickers for all theme elements
-  - Individual reset buttons to restore defaults
-  - Preview panel showing all UI elements in real-time
 
 ## Installation
 
@@ -44,63 +49,56 @@ egui-thematic = "0.1.0" # supports egui 0.33.0
 
 ### Quickstart
 
-Add egui-thematic to your nightshade application:
+Add egui-thematic to your egui application, here's an example using the [nightshade](https://github.com/matthewjberger/nightshade) game engine:
 
 **Cargo.toml:**
+
 ```toml
 [dependencies]
-nightshade = { git = "https://github.com/matthewjberger/nightshade" }
+nightshade = "0.6.7"
 egui-thematic = "0.1.0"
 ```
 
 **main.rs:**
+
 ```rust
 use egui_thematic::{render_theme_panel, ThemeEditorState};
 use nightshade::prelude::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    launch(App::default())?;
+    launch(ThemeEditorDemo::default())?;
     Ok(())
 }
 
 #[derive(Default)]
-struct App {
+struct ThemeEditorDemo {
     theme_editor_state: ThemeEditorState,
     show_theme_editor: bool,
 }
 
-impl State for App {
+impl State for ThemeEditorDemo {
     fn title(&self) -> &str {
-        "My App"
-    }
-
-    fn plugins(&self) -> PluginGroup {
-        use nightshade::plugins::PluginGroupExt;
-        PluginGroup::new().add(FlyCameraPlugin)
+        "egui-thematic Demo"
     }
 
     fn initialize(&mut self, world: &mut World) {
         world.resources.user_interface.enabled = true;
-        world.resources.graphics.show_grid = true;
-        world.resources.graphics.show_skybox = true;
-
-        let camera_position = Vec3::new(0.0, 2.0, 10.0);
-        let main_camera = spawn_camera(world, camera_position, "Main Camera".to_string());
-        world.resources.active_camera = Some(main_camera);
-
         self.show_theme_editor = true;
     }
 
     fn ui(&mut self, _world: &mut World, ui_context: &egui::Context) {
-        // Render the theme panel - handles theme application and editor window
-        render_theme_panel(ui_context, &mut self.theme_editor_state, &mut self.show_theme_editor);
+        render_theme_panel(
+            ui_context,
+            &mut self.theme_editor_state,
+            &mut self.show_theme_editor,
+        );
 
-        // Your app UI here
-        egui::CentralPanel::default().show(ui_context, |ui| {
-            ui.heading("My Application");
-            if ui.button("Toggle Theme Editor").clicked() {
-                self.show_theme_editor = !self.show_theme_editor;
-            }
+        egui::TopBottomPanel::top("top_panel").show(ui_context, |ui| {
+            ui.horizontal(|ui| {
+                if ui.button("Toggle Theme Editor").clicked() {
+                    self.show_theme_editor = !self.show_theme_editor;
+                }
+            });
         });
     }
 
@@ -110,6 +108,7 @@ impl State for App {
         }
     }
 }
+
 ```
 
 ### Working with Themes
@@ -153,33 +152,36 @@ let random_theme = ThemeConfig::randomize();
 ctx.set_visuals(random_theme.to_visuals());
 ```
 
-The randomize feature is great for:
-- Quickly exploring different color combinations
+The randomize feature can be used for:
+
+- Exploring different color combinations
 - Finding inspiration for custom themes
 - Testing your UI with extreme color variations
-- Having fun with wild color schemes
 
 ## Demo Application
 
-A comprehensive demo application is included that showcases all features of egui-thematic.
+A demo application is included that showcases the features of egui-thematic.
 
 ### Running the Demo
 
-Using `just` (recommended):
+Using `just`:
+
 ```bash
 just run
 ```
 
 Or directly with cargo:
+
 ```bash
 cargo run --release --manifest-path ./demo/Cargo.toml
 ```
 
-The demo provides:
-- A fully functional theme editor with all features
+The demo includes:
+
+- Theme editor with all features
 - Sample UI elements showing how the theme affects different widgets
-- Quick preset buttons (Dark, Light, Randomize)
-- Interactive instructions and examples
+- Preset buttons (Dark, Light, Randomize)
+- Instructions and examples
 
 ## Development
 
@@ -203,38 +205,58 @@ Using `justfile` for convenience:
 
 ## Theme Configuration
 
-The `ThemeConfig` struct provides fine-grained control over all visual aspects:
+The `ThemeConfig` struct provides complete control over all 73 egui visual properties:
 
 ```rust
 pub struct ThemeConfig {
     pub name: String,
     pub dark_mode: bool,
 
-    // Optional color overrides (None = use egui defaults)
+    // Text colors (2 properties)
     pub override_text_color: Option<[u8; 4]>,
+    pub override_weak_text_color: Option<[u8; 4]>,
+
+    // Windows (5 properties)
     pub override_window_fill: Option<[u8; 4]>,
+    pub override_window_stroke_color: Option<[u8; 4]>,
+    pub override_window_stroke_width: Option<f32>,
+    pub override_window_corner_radius: Option<u8>,
+    pub override_window_shadow_size: Option<u8>,
+
+    // Panels (1 property)
     pub override_panel_fill: Option<[u8; 4]>,
+
+    // Selection (3 properties)
     pub override_selection_bg: Option<[u8; 4]>,
-    pub override_hyperlink_color: Option<[u8; 4]>,
-    pub override_faint_bg_color: Option<[u8; 4]>,
-    pub override_extreme_bg_color: Option<[u8; 4]>,
-    pub override_code_bg_color: Option<[u8; 4]>,
-    pub override_warn_fg_color: Option<[u8; 4]>,
-    pub override_error_fg_color: Option<[u8; 4]>,
+    pub override_selection_stroke_color: Option<[u8; 4]>,
+    pub override_selection_stroke_width: Option<f32>,
+
+    // Widget States (5 states × 8 properties = 40 properties)
+    // Each state has: bg_fill, weak_bg_fill, bg_stroke (color + width),
+    // corner_radius, fg_stroke (color + width), expansion
+    pub override_widget_noninteractive_*: Option<...>,
+    pub override_widget_inactive_*: Option<...>,
+    pub override_widget_hovered_*: Option<...>,
+    pub override_widget_active_*: Option<...>,
+    pub override_widget_open_*: Option<...>,
+
+    // UI Controls (8 properties)
+    pub override_resize_corner_size: Option<f32>,
+    pub override_text_cursor_width: Option<f32>,
+    pub override_clip_rect_margin: Option<f32>,
+    pub override_button_frame: Option<bool>,
+    pub override_collapsing_header_frame: Option<bool>,
+    pub override_indent_has_left_vline: Option<bool>,
+    pub override_striped: Option<bool>,
+    pub override_slider_trailing_fill: Option<bool>,
 }
 ```
 
-All color overrides are optional - when `None`, egui's default values for the selected mode (dark/light) are used.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+All overrides are optional - when `None`, egui's default values for the selected mode (dark/light) are used. This allows for:
+- Minimal configuration (just override what you need)
+- Full control (override all 73 properties for complete customization)
+- Mix and match (use defaults for most things, customize specific details)
 
 ## License
 
 Licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-## Acknowledgments
-
-- Built with [egui](https://github.com/emilk/egui) by Emil Ernerfeldt
-- Inspired by the need for easy theme customization in egui applications

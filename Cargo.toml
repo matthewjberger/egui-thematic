@@ -3,7 +3,7 @@ name = "egui-thematic"
 version = "0.1.0"
 authors = ["Matthew Berger <matthewjordanberger@gmail.com>"]
 description = """
-A comprehensive theme editor and configuration system for egui applications with live preview,
+A theme editor and configuration system for egui applications with live preview,
 preset management, random theme generation, and persistence.
 """
 homepage = "https://github.com/matthewjberger/egui-thematic"
