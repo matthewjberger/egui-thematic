@@ -1,0 +1,27 @@
+[package]
+name = "egui-thematic"
+version = "0.1.0"
+authors = ["Matthew Berger <matthewjordanberger@gmail.com>"]
+description = """
+A comprehensive theme editor and configuration system for egui applications with live preview,
+preset management, random theme generation, and persistence.
+"""
+homepage = "https://github.com/matthewjberger/egui-thematic"
+repository = "https://github.com/matthewjberger/egui-thematic"
+keywords = ["egui", "theme", "ui", "bevy", "editor"]
+categories = ["gui", "visualization"]
+license = "MIT"
+edition = "2021"
+rust-version = "1.90.0"
+readme = "README.md"
+
+[workspace]
+members = ["demo"]
+
+[dependencies]
+bevy = "0.15.3"
+egui = "0.31.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rfd = "0.15.3"
+rand = "0.8"
