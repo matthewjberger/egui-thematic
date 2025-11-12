@@ -69,7 +69,6 @@
 //! # }
 //! ```
 
-use bevy::prelude::Resource;
 use egui::{Color32, Visuals};
 
 /// Configuration for an egui theme.
@@ -149,6 +148,175 @@ impl ThemeConfig {
             dark_mode: false,
             ..Default::default()
         }
+    }
+
+    pub fn dracula_preset() -> Self {
+        Self {
+            name: "Dracula".to_string(),
+            dark_mode: true,
+            override_text_color: Some([248, 248, 242, 255]),
+            override_window_fill: Some([40, 42, 54, 255]),
+            override_panel_fill: Some([68, 71, 90, 255]),
+            override_selection_bg: Some([98, 114, 164, 255]),
+            override_hyperlink_color: Some([139, 233, 253, 255]),
+            override_faint_bg_color: Some([68, 71, 90, 255]),
+            override_extreme_bg_color: Some([21, 22, 30, 255]),
+            override_code_bg_color: Some([68, 71, 90, 255]),
+            override_warn_fg_color: Some([241, 250, 140, 255]),
+            override_error_fg_color: Some([255, 85, 85, 255]),
+        }
+    }
+
+    pub fn nord_preset() -> Self {
+        Self {
+            name: "Nord".to_string(),
+            dark_mode: true,
+            override_text_color: Some([216, 222, 233, 255]),
+            override_window_fill: Some([46, 52, 64, 255]),
+            override_panel_fill: Some([59, 66, 82, 255]),
+            override_selection_bg: Some([136, 192, 208, 255]),
+            override_hyperlink_color: Some([136, 192, 208, 255]),
+            override_faint_bg_color: Some([59, 66, 82, 255]),
+            override_extreme_bg_color: Some([29, 33, 42, 255]),
+            override_code_bg_color: Some([59, 66, 82, 255]),
+            override_warn_fg_color: Some([235, 203, 139, 255]),
+            override_error_fg_color: Some([191, 97, 106, 255]),
+        }
+    }
+
+    pub fn gruvbox_dark_preset() -> Self {
+        Self {
+            name: "Gruvbox Dark".to_string(),
+            dark_mode: true,
+            override_text_color: Some([235, 219, 178, 255]),
+            override_window_fill: Some([40, 40, 40, 255]),
+            override_panel_fill: Some([60, 56, 54, 255]),
+            override_selection_bg: Some([102, 92, 84, 255]),
+            override_hyperlink_color: Some([131, 165, 152, 255]),
+            override_faint_bg_color: Some([60, 56, 54, 255]),
+            override_extreme_bg_color: Some([29, 32, 33, 255]),
+            override_code_bg_color: Some([60, 56, 54, 255]),
+            override_warn_fg_color: Some([250, 189, 47, 255]),
+            override_error_fg_color: Some([251, 73, 52, 255]),
+        }
+    }
+
+    pub fn solarized_dark_preset() -> Self {
+        Self {
+            name: "Solarized Dark".to_string(),
+            dark_mode: true,
+            override_text_color: Some([131, 148, 150, 255]),
+            override_window_fill: Some([0, 43, 54, 255]),
+            override_panel_fill: Some([7, 54, 66, 255]),
+            override_selection_bg: Some([88, 110, 117, 255]),
+            override_hyperlink_color: Some([42, 161, 152, 255]),
+            override_faint_bg_color: Some([7, 54, 66, 255]),
+            override_extreme_bg_color: Some([0, 30, 38, 255]),
+            override_code_bg_color: Some([7, 54, 66, 255]),
+            override_warn_fg_color: Some([181, 137, 0, 255]),
+            override_error_fg_color: Some([220, 50, 47, 255]),
+        }
+    }
+
+    pub fn solarized_light_preset() -> Self {
+        Self {
+            name: "Solarized Light".to_string(),
+            dark_mode: false,
+            override_text_color: Some([101, 123, 131, 255]),
+            override_window_fill: Some([253, 246, 227, 255]),
+            override_panel_fill: Some([238, 232, 213, 255]),
+            override_selection_bg: Some([147, 161, 161, 255]),
+            override_hyperlink_color: Some([38, 139, 210, 255]),
+            override_faint_bg_color: Some([238, 232, 213, 255]),
+            override_extreme_bg_color: Some([253, 246, 227, 255]),
+            override_code_bg_color: Some([238, 232, 213, 255]),
+            override_warn_fg_color: Some([181, 137, 0, 255]),
+            override_error_fg_color: Some([220, 50, 47, 255]),
+        }
+    }
+
+    pub fn monokai_preset() -> Self {
+        Self {
+            name: "Monokai".to_string(),
+            dark_mode: true,
+            override_text_color: Some([248, 248, 242, 255]),
+            override_window_fill: Some([39, 40, 34, 255]),
+            override_panel_fill: Some([73, 72, 62, 255]),
+            override_selection_bg: Some([73, 72, 62, 255]),
+            override_hyperlink_color: Some([102, 217, 239, 255]),
+            override_faint_bg_color: Some([73, 72, 62, 255]),
+            override_extreme_bg_color: Some([30, 31, 25, 255]),
+            override_code_bg_color: Some([73, 72, 62, 255]),
+            override_warn_fg_color: Some([230, 219, 116, 255]),
+            override_error_fg_color: Some([249, 38, 114, 255]),
+        }
+    }
+
+    pub fn one_dark_preset() -> Self {
+        Self {
+            name: "One Dark".to_string(),
+            dark_mode: true,
+            override_text_color: Some([171, 178, 191, 255]),
+            override_window_fill: Some([40, 44, 52, 255]),
+            override_panel_fill: Some([33, 37, 43, 255]),
+            override_selection_bg: Some([61, 66, 77, 255]),
+            override_hyperlink_color: Some([97, 175, 239, 255]),
+            override_faint_bg_color: Some([33, 37, 43, 255]),
+            override_extreme_bg_color: Some([21, 23, 27, 255]),
+            override_code_bg_color: Some([33, 37, 43, 255]),
+            override_warn_fg_color: Some([229, 192, 123, 255]),
+            override_error_fg_color: Some([224, 108, 117, 255]),
+        }
+    }
+
+    pub fn tokyo_night_preset() -> Self {
+        Self {
+            name: "Tokyo Night".to_string(),
+            dark_mode: true,
+            override_text_color: Some([192, 202, 245, 255]),
+            override_window_fill: Some([26, 27, 38, 255]),
+            override_panel_fill: Some([36, 40, 59, 255]),
+            override_selection_bg: Some([56, 62, 90, 255]),
+            override_hyperlink_color: Some([122, 162, 247, 255]),
+            override_faint_bg_color: Some([36, 40, 59, 255]),
+            override_extreme_bg_color: Some([16, 17, 28, 255]),
+            override_code_bg_color: Some([36, 40, 59, 255]),
+            override_warn_fg_color: Some([224, 175, 104, 255]),
+            override_error_fg_color: Some([247, 118, 142, 255]),
+        }
+    }
+
+    pub fn catppuccin_mocha_preset() -> Self {
+        Self {
+            name: "Catppuccin Mocha".to_string(),
+            dark_mode: true,
+            override_text_color: Some([205, 214, 244, 255]),
+            override_window_fill: Some([30, 30, 46, 255]),
+            override_panel_fill: Some([49, 50, 68, 255]),
+            override_selection_bg: Some([88, 91, 112, 255]),
+            override_hyperlink_color: Some([137, 180, 250, 255]),
+            override_faint_bg_color: Some([49, 50, 68, 255]),
+            override_extreme_bg_color: Some([17, 17, 27, 255]),
+            override_code_bg_color: Some([49, 50, 68, 255]),
+            override_warn_fg_color: Some([249, 226, 175, 255]),
+            override_error_fg_color: Some([243, 139, 168, 255]),
+        }
+    }
+
+    pub fn all_presets() -> Vec<Self> {
+        vec![
+            Self::dark_preset(),
+            Self::light_preset(),
+            Self::dracula_preset(),
+            Self::nord_preset(),
+            Self::gruvbox_dark_preset(),
+            Self::solarized_dark_preset(),
+            Self::solarized_light_preset(),
+            Self::monokai_preset(),
+            Self::one_dark_preset(),
+            Self::tokyo_night_preset(),
+            Self::catppuccin_mocha_preset(),
+        ]
     }
 
     /// Converts this theme configuration to egui's `Visuals` type.
@@ -271,6 +439,72 @@ impl ThemeConfig {
         Ok(config)
     }
 
+    pub fn to_rust_code(&self) -> String {
+        let mut code = String::new();
+        code.push_str("fn apply_theme(ctx: &egui::Context) {\n");
+        code.push_str(&format!("    let mut visuals = if {} {{\n", self.dark_mode));
+        code.push_str("        egui::Visuals::dark()\n");
+        code.push_str("    } else {\n");
+        code.push_str("        egui::Visuals::light()\n");
+        code.push_str("    };\n\n");
+
+        if let Some(color) = self.override_text_color {
+            code.push_str(&format!("    visuals.override_text_color = Some(egui::Color32::from_rgba_unmultiplied({}, {}, {}, {}));\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        if let Some(color) = self.override_window_fill {
+            code.push_str(&format!("    visuals.window_fill = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        if let Some(color) = self.override_panel_fill {
+            code.push_str(&format!(
+                "    visuals.panel_fill = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]
+            ));
+        }
+
+        if let Some(color) = self.override_selection_bg {
+            code.push_str(&format!("    visuals.selection.bg_fill = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        if let Some(color) = self.override_hyperlink_color {
+            code.push_str(&format!("    visuals.hyperlink_color = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        if let Some(color) = self.override_faint_bg_color {
+            code.push_str(&format!("    visuals.faint_bg_color = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        if let Some(color) = self.override_extreme_bg_color {
+            code.push_str(&format!("    visuals.extreme_bg_color = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        if let Some(color) = self.override_code_bg_color {
+            code.push_str(&format!("    visuals.code_bg_color = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        if let Some(color) = self.override_warn_fg_color {
+            code.push_str(&format!("    visuals.warn_fg_color = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        if let Some(color) = self.override_error_fg_color {
+            code.push_str(&format!("    visuals.error_fg_color = egui::Color32::from_rgba_unmultiplied({}, {}, {}, {});\n",
+                color[0], color[1], color[2], color[3]));
+        }
+
+        code.push_str("\n    ctx.set_visuals(visuals);\n");
+        code.push_str("}\n");
+        code
+    }
+
     /// Generates a completely random theme.
     ///
     /// This creates a theme with random colors for all visual elements, including
@@ -319,16 +553,10 @@ impl ThemeConfig {
 
 /// State for the theme editor UI.
 ///
-/// This resource holds the current theme configuration being edited, available presets,
+/// This holds the current theme configuration being edited, available presets,
 /// and temporary color values for the color pickers.
 ///
-/// When using with Bevy, initialize it as a resource:
-///
-/// ```rust,ignore
-/// app.init_resource::<ThemeEditorState>();
-/// ```
-///
-/// For standalone egui/eframe apps, store it in your app struct:
+/// # Example
 ///
 /// ```rust
 /// use egui_thematic::ThemeEditorState;
@@ -337,16 +565,18 @@ impl ThemeConfig {
 ///     theme_editor_state: ThemeEditorState,
 /// }
 /// ```
-#[derive(Resource)]
 pub struct ThemeEditorState {
-    /// The currently active theme configuration
     pub current_config: ThemeConfig,
-    /// Available theme presets (default includes Dark and Light)
     pub presets: Vec<ThemeConfig>,
-    /// Index of the selected preset, or None for custom themes
     pub selected_preset_index: Option<usize>,
+    pub show_code_export: bool,
 
-    /// Temporary color for the text color picker
+    pub storybook_checkbox: bool,
+    pub storybook_radio: i32,
+    pub storybook_slider: f32,
+    pub storybook_text: String,
+    pub storybook_combo_selected: usize,
+
     pub temp_text_color: Color32,
     /// Temporary color for the window fill picker
     pub temp_window_fill: Color32,
@@ -370,15 +600,22 @@ pub struct ThemeEditorState {
 
 impl Default for ThemeEditorState {
     fn default() -> Self {
-        let dark_preset = ThemeConfig::dark_preset();
-        let light_preset = ThemeConfig::light_preset();
+        let presets = ThemeConfig::all_presets();
+        let dark_preset = presets[0].clone();
 
         let visuals = Visuals::dark();
 
         Self {
-            current_config: dark_preset.clone(),
-            presets: vec![dark_preset, light_preset],
+            current_config: dark_preset,
+            presets,
             selected_preset_index: Some(0),
+            show_code_export: false,
+
+            storybook_checkbox: true,
+            storybook_radio: 1,
+            storybook_slider: 50.0,
+            storybook_text: "Example text".to_string(),
+            storybook_combo_selected: 0,
 
             temp_text_color: visuals.text_color(),
             temp_window_fill: visuals.window_fill,
@@ -436,6 +673,25 @@ impl ThemeEditorState {
 ///         render_theme_editor(ui, &mut theme_editor_state);
 ///     });
 /// ```
+pub fn render_theme_panel(
+    ctx: &egui::Context,
+    editor_state: &mut ThemeEditorState,
+    show_theme_editor: &mut bool,
+) {
+    let visuals = editor_state.current_config.to_visuals();
+    ctx.set_visuals(visuals);
+
+    if *show_theme_editor {
+        egui::Window::new("Theme Editor")
+            .open(show_theme_editor)
+            .resizable(true)
+            .default_width(400.0)
+            .show(ctx, |ui| {
+                render_theme_editor(ui, editor_state);
+            });
+    }
+}
+
 pub fn render_theme_editor(ui: &mut egui::Ui, editor_state: &mut ThemeEditorState) {
     ui.heading("Theme Editor");
     ui.add_space(8.0);
@@ -470,6 +726,7 @@ pub fn render_theme_editor(ui: &mut egui::Ui, editor_state: &mut ThemeEditorStat
                 }
             });
 
+        #[cfg(not(target_arch = "wasm32"))]
         if ui.button("Save Theme...").clicked() {
             if let Some(path) = rfd::FileDialog::new()
                 .add_filter("Theme", &["theme.json"])
@@ -484,6 +741,7 @@ pub fn render_theme_editor(ui: &mut egui::Ui, editor_state: &mut ThemeEditorStat
             }
         }
 
+        #[cfg(not(target_arch = "wasm32"))]
         if ui.button("Load Theme...").clicked() {
             if let Some(path) = rfd::FileDialog::new()
                 .add_filter("Theme", &["theme.json"])
@@ -525,7 +783,32 @@ pub fn render_theme_editor(ui: &mut egui::Ui, editor_state: &mut ThemeEditorStat
                 .set_visuals(editor_state.current_config.to_visuals());
             editor_state.selected_preset_index = None;
         }
+
+        if ui.button("Export Code").clicked() {
+            editor_state.show_code_export = true;
+        }
     });
+
+    if editor_state.show_code_export {
+        egui::Window::new("Generated Rust Code")
+            .open(&mut editor_state.show_code_export)
+            .show(ui.ctx(), |ui| {
+                ui.label("Copy this code to your application:");
+                ui.add_space(4.0);
+
+                let code = editor_state.current_config.to_rust_code();
+                egui::ScrollArea::vertical()
+                    .max_height(400.0)
+                    .show(ui, |ui| {
+                        ui.code(&code);
+                    });
+
+                ui.add_space(8.0);
+                if ui.button("Copy to Clipboard").clicked() {
+                    ui.ctx().copy_text(code.clone());
+                }
+            });
+    }
 
     ui.separator();
 
@@ -614,6 +897,171 @@ pub fn render_theme_editor(ui: &mut egui::Ui, editor_state: &mut ThemeEditorStat
                         .inner_margin(4.0)
                         .show(ui, |ui| {
                             ui.label("Extreme background");
+                        });
+                });
+        });
+
+        ui.collapsing("Storybook - Interactive Widget Showcase", |ui| {
+            ui.add_space(4.0);
+            ui.label("Interact with widgets below to see how your theme affects all controls:");
+            ui.add_space(8.0);
+
+            egui::Frame::new()
+                .fill(ui.visuals().panel_fill)
+                .inner_margin(8.0)
+                .show(ui, |ui| {
+                    ui.heading("Text Variants");
+                    ui.label("Normal text");
+                    ui.weak("Weak/secondary text");
+                    ui.strong("Strong/bold text");
+                    ui.monospace("Monospace text");
+                    ui.hyperlink_to("Hyperlink", "https://example.com");
+                    ui.label(egui::RichText::new("Warning").color(ui.visuals().warn_fg_color));
+                    ui.label(egui::RichText::new("Error").color(ui.visuals().error_fg_color));
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("Buttons");
+                    ui.horizontal_wrapped(|ui| {
+                        let _ = ui.button("Normal Button");
+                        let _ = ui.small_button("Small");
+                        ui.add_enabled(false, egui::Button::new("Disabled"));
+                        if ui.button("Click Me").clicked() {}
+                    });
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("Checkboxes & Radio Buttons");
+                    ui.checkbox(&mut editor_state.storybook_checkbox, "Interactive checkbox");
+                    ui.horizontal(|ui| {
+                        ui.radio_value(&mut editor_state.storybook_radio, 0, "Option A");
+                        ui.radio_value(&mut editor_state.storybook_radio, 1, "Option B");
+                        ui.radio_value(&mut editor_state.storybook_radio, 2, "Option C");
+                    });
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("Sliders & Progress");
+                    ui.add(
+                        egui::Slider::new(&mut editor_state.storybook_slider, 0.0..=100.0)
+                            .text("Value"),
+                    );
+                    ui.add(
+                        egui::ProgressBar::new(editor_state.storybook_slider / 100.0)
+                            .show_percentage(),
+                    );
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("Text Input");
+                    ui.text_edit_singleline(&mut editor_state.storybook_text);
+                    ui.text_edit_multiline(&mut editor_state.storybook_text);
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("ComboBox & Selectable");
+                    let combo_items = ["First", "Second", "Third", "Fourth"];
+                    egui::ComboBox::from_label("Dropdown")
+                        .selected_text(combo_items[editor_state.storybook_combo_selected])
+                        .show_ui(ui, |ui| {
+                            for (index, item) in combo_items.iter().enumerate() {
+                                ui.selectable_value(
+                                    &mut editor_state.storybook_combo_selected,
+                                    index,
+                                    *item,
+                                );
+                            }
+                        });
+
+                    ui.add_space(8.0);
+                    ui.horizontal(|ui| {
+                        ui.label("Selectable labels:");
+                        let _ = ui.selectable_label(
+                            editor_state.storybook_combo_selected == 0,
+                            "Selected",
+                        );
+                        let _ = ui.selectable_label(
+                            editor_state.storybook_combo_selected != 0,
+                            "Not Selected",
+                        );
+                    });
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("Backgrounds & Frames");
+                    egui::Frame::new()
+                        .fill(ui.visuals().faint_bg_color)
+                        .inner_margin(8.0)
+                        .show(ui, |ui| {
+                            ui.label("Faint background color");
+                        });
+
+                    ui.add_space(4.0);
+
+                    egui::Frame::new()
+                        .fill(ui.visuals().extreme_bg_color)
+                        .inner_margin(8.0)
+                        .show(ui, |ui| {
+                            ui.label("Extreme background color");
+                        });
+
+                    ui.add_space(4.0);
+
+                    egui::Frame::new()
+                        .fill(ui.visuals().code_bg_color)
+                        .inner_margin(8.0)
+                        .show(ui, |ui| {
+                            ui.monospace("Code background color");
+                        });
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("Collapsing Headers");
+                    ui.collapsing("Collapsed by default", |ui| {
+                        ui.label("Hidden content inside collapsing header");
+                    });
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("Separators & Spacing");
+                    ui.label("Above separator");
+                    ui.separator();
+                    ui.label("Below separator");
+
+                    ui.add_space(12.0);
+                    ui.separator();
+                    ui.add_space(12.0);
+
+                    ui.heading("Grid Layout");
+                    egui::Grid::new("storybook_grid")
+                        .num_columns(3)
+                        .spacing([10.0, 10.0])
+                        .show(ui, |ui| {
+                            ui.label("Row 1, Col 1");
+                            ui.label("Row 1, Col 2");
+                            ui.label("Row 1, Col 3");
+                            ui.end_row();
+
+                            ui.label("Row 2, Col 1");
+                            let _ = ui.button("Button");
+                            ui.checkbox(&mut editor_state.storybook_checkbox, "Check");
+                            ui.end_row();
                         });
                 });
         });

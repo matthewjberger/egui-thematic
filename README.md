@@ -37,92 +37,78 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-egui-thematic = "0.1.0" # supports egui 0.31.1
+egui-thematic = "0.1.0" # supports egui 0.33.0
 ```
 
 ## Usage
 
-### Basic Usage with eframe
+### Quickstart
 
+Add egui-thematic to your nightshade application:
+
+**Cargo.toml:**
+```toml
+[dependencies]
+nightshade = { git = "https://github.com/matthewjberger/nightshade" }
+egui-thematic = "0.1.0"
+```
+
+**main.rs:**
 ```rust
-use egui_thematic::{ThemeConfig, ThemeEditorState, render_theme_editor};
+use egui_thematic::{render_theme_panel, ThemeEditorState};
+use nightshade::prelude::*;
 
-struct MyApp {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    launch(App::default())?;
+    Ok(())
+}
+
+#[derive(Default)]
+struct App {
     theme_editor_state: ThemeEditorState,
     show_theme_editor: bool,
 }
 
-impl Default for MyApp {
-    fn default() -> Self {
-        Self {
-            theme_editor_state: ThemeEditorState::default(),
-            show_theme_editor: true,
-        }
+impl State for App {
+    fn title(&self) -> &str {
+        "My App"
     }
-}
 
-impl eframe::App for MyApp {
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        // Apply the current theme
-        let visuals = self.theme_editor_state.current_config.to_visuals();
-        ctx.set_visuals(visuals);
+    fn plugins(&self) -> PluginGroup {
+        use nightshade::plugins::PluginGroupExt;
+        PluginGroup::new().add(FlyCameraPlugin)
+    }
 
-        // Show the theme editor window
-        if self.show_theme_editor {
-            egui::Window::new("Theme Editor")
-                .open(&mut self.show_theme_editor)
-                .show(ctx, |ui| {
-                    render_theme_editor(ui, &mut self.theme_editor_state);
-                });
-        }
+    fn initialize(&mut self, world: &mut World) {
+        world.resources.user_interface.enabled = true;
+        world.resources.graphics.show_grid = true;
+        world.resources.graphics.show_skybox = true;
+
+        let camera_position = Vec3::new(0.0, 2.0, 10.0);
+        let main_camera = spawn_camera(world, camera_position, "Main Camera".to_string());
+        world.resources.active_camera = Some(main_camera);
+
+        self.show_theme_editor = true;
+    }
+
+    fn ui(&mut self, _world: &mut World, ui_context: &egui::Context) {
+        // Render the theme panel - handles theme application and editor window
+        render_theme_panel(ui_context, &mut self.theme_editor_state, &mut self.show_theme_editor);
 
         // Your app UI here
-        egui::CentralPanel::default().show(ctx, |ui| {
+        egui::CentralPanel::default().show(ui_context, |ui| {
             ui.heading("My Application");
             if ui.button("Toggle Theme Editor").clicked() {
                 self.show_theme_editor = !self.show_theme_editor;
             }
         });
     }
-}
-```
 
-### Integration with Bevy
-
-```rust
-use bevy::prelude::*;
-use egui_thematic::{ThemeEditorState, render_theme_editor};
-
-fn setup(mut commands: Commands) {
-    commands.init_resource::<ThemeEditorState>();
-}
-
-fn ui_system(
-    mut theme_editor_state: ResMut<ThemeEditorState>,
-    mut egui_contexts: Query<&mut EguiContext>,
-) {
-    for mut egui_context in egui_contexts.iter_mut() {
-        let context = egui_context.get_mut();
-
-        // Apply the current theme
-        let visuals = theme_editor_state.current_config.to_visuals();
-        context.set_visuals(visuals);
-
-        // Render the theme editor
-        egui::Window::new("Theme Editor")
-            .show(context, |ui| {
-                render_theme_editor(ui, &mut theme_editor_state);
-            });
+    fn on_keyboard_input(&mut self, world: &mut World, key_code: KeyCode, key_state: KeyState) {
+        if matches!((key_code, key_state), (KeyCode::KeyQ, KeyState::Pressed)) {
+            world.resources.window.should_exit = true;
+        }
     }
-}
-
-fn main() {
-    App::new()
-        .add_plugins(DefaultPlugins)
-        .add_plugins(EguiPlugin)
-        .add_systems(Startup, setup)
-        .add_systems(Update, ui_system)
-        .run();
 }
 ```
 
