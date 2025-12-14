@@ -42,7 +42,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-egui-thematic = "0.1.0" # supports egui 0.33.0
+egui-thematic = "0.1.1" # supports egui 0.33.0
 ```
 
 ## Usage
@@ -56,7 +56,7 @@ Add egui-thematic to your egui application, here's an example using the [nightsh
 ```toml
 [dependencies]
 nightshade = "0.6.7"
-egui-thematic = "0.1.0"
+egui-thematic = "0.1.1"
 ```
 
 **main.rs:**
