@@ -7,6 +7,8 @@
 
 A theme editor and configuration system for [egui](https://github.com/emilk/egui) applications with live preview, preset management, random theme generation, and persistence.
 
+<img width="1280" height="1109" alt="image" src="https://github.com/user-attachments/assets/c2d8b6ab-5d45-4979-b3d1-b375b4190236" />
+
 ## Features
 
 - **Complete Theme Configuration**: Full control over all 73 egui visual properties
